@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DapperEx 完整DEMO</title>
+    @await Html.PartialAsync("HeadInclude")
+</head>
+<body>
+    <section id="main-wrapper" class="theme-default">
+        @await Html.PartialAsync("Header")
+        @await Html.PartialAsync("Left")
+        <!--main content start-->
+        <section class="main-content-wrapper">
+            <div class="pageheader">
+                <h1>DapperEx 查询测试</h1>
+                <div class="breadcrumb-wrapper hidden-xs">
+                    <span class="label">您的位置:</span>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="javascript:;">DapperEx 完整DEMO</a>
+                        </li>
+                        <li>Tables</li>
+                        <li class="active">数据查询</li>
+                    </ol>
+                </div>
+            </div>
+            <section id="main-content" class="animated fadeInUp">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">分页查询</h3>
+                                <div class="actions pull-right">
+                                    <i class="fa fa-expand"></i>
+                                    <i class="fa fa-chevron-down"></i>
+                                    <i class="fa fa-times"></i>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <select class="form-control input-sm" v-model="query.dictid" style="margin-top:5px;">
+                                                <option value="0">Dict类型</option>
+                                                @foreach (var i in ViewBag.dict)
+                                                {
+                                                    <option value="@i.Key">@i.Value</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <select class="form-control input-sm" v-model="query.deleted" style="margin-top:5px;">
+                                                <option value="">是否删除</option>
+                                                <option value="True">True</option>
+                                                <option value="False">False</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <input class="form-control input-sm" v-model="query.keyword" style="margin-top:5px;" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <input class="form-control input-sm" v-model="query.keywordDic" style="margin-top:5px;" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <input type="button" class="form-control" v-on:click="listquery" style="margin-top:5px;" value="查询" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel-body">
+                                <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>名称</th>
+                                            <th>Id</th>
+                                            <th>创建时间</th>
+                                            <th>DictID</th>
+                                            <th>DictName</th>
+                                            <th>删除状态</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <tr v-for="item in dataList">
+                                            <td>{{item.Title}}</td>
+                                            <td>{{item.Id}}</td>
+                                            <td>{{item.CreateTimeString}}</td>
+                                            <td>{{item.DictID}}</td>
+                                            <td>{{item.DictName}}</td>
+                                            <td>{{item.Deleted}}</td>
+                                            <td>
+                                                <a :href="'/Home/Edit?Id='+item.Id" target="_blank">编辑</a>
+                                                <a href="javascript:;" v-on:click="DelLogic(item.Id);">删除</a>
+                                                <a href="javascript:;" v-on:click="DelPhysic(item.Id)">物理删除</a>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="btn-toolbar" role="toolbar">
+                                <div class="btn-group" style="margin-left:20px;margin-bottom:30px;">
+                                        <button type="button" v-for="item in pages" v-on:click="go(item);" :class="item==pageIndex?'btn btn-primary':'btn btn-default'">{{item}}</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+        <!--main content end-->
+    </section>
+    @await Html.PartialAsync("SideBar")
+    @await Html.PartialAsync("Config")
+    @await Html.PartialAsync("FootInclude")
+    <script>
+        $(document).ready(function () {
+            app.dateRangePicker();
+            app.chartJs();
+            app.weather();
+            app.spinStart();
+            app.spinStop();
+        });
+        var vm = new Vue({
+            el: "#main-wrapper",
+            data: {
+                query: {
+                    dictid: "",
+                    deleted: "",
+                    keyword: "",
+                    keywordDic: "",
+                    pagesize: 10,
+                    page:1
+                },
+                dataList: [],
+                totalPage: 0,
+                pageIndex:1
+            },
+            methods: {
+                listquery: function () {
+                    this.query.page = 1;
+                    this.listdata();
+                },
+                listdata: function () {
+                    var that = this;
+                    $.post("/Home/PageListQueryHelperData", this.query, function (data) {
+                        that.listdatacallback(data);
+                    });
+                },
+                listdatacallback: function (data) {
+                    this.dataList = data.Items;
+                    this.totalPage = data.TotalPage;
+                    this.pageIndex = data.PageIndex;
+                },
+                go: function (i) {
+                    this.query.page = i;
+                    this.listdata();
+                },
+                DelLogic: function (id) {
+                    var that = this;
+                    $.post("/Home/DelLogic?id=" + id, {}, function (data, status) {
+                        if (data.Success) {
+                            alert("操作成功！DapperEx的返回值为 " + data.Result);
+                            that.listdata();
+                        }
+                    });
+                },
+                DelPhysic: function (id) {
+                    var that = this;
+                    $.post("/Home/DelPhysic?id=" + id, {}, function (data, status) {
+                        if (data.Success) {
+                            alert("操作成功！DapperEx的返回值为 " + data.Result);
+                            that.listdata();
+                        }
+                    });
+                }
+            },
+            computed: {
+                pages: function () {
+                    var ps = [];
+                    for (var i = 1; i <= this.totalPage; i++) {
+                        ps.push(i);
+                    }
+                    return ps;
+                }
+            },
+            created: function () {
+                this.listquery();
+            }
+        });
+    </script>
+
+</body>
+</html>

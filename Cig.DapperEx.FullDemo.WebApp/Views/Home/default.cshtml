@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DapperEx 完整DEMO</title>
+    @await Html.PartialAsync("HeadInclude")
+</head>
+
+<body>
+    <section id="main-wrapper" class="theme-default">
+        @await Html.PartialAsync("Header")
+        @await Html.PartialAsync("Left")
+        <!--main content start-->
+        <section class="main-content-wrapper">
+            <div class="pageheader">
+                <h1>DapperEx 完整DEMO项目</h1>
+                <p class="description">欢迎使用 DapperEx 完整DEMO项目</p>
+                <div class="breadcrumb-wrapper hidden-xs">
+                    <span class="label">您的位置:</span>
+                    <ol class="breadcrumb">
+                        <li class="active">DapperEx 完整DEMO项目</li>
+                    </ol>
+                </div>
+            </div>
+            <section id="main-content" class="animated fadeInUp">
+                <div class="row">
+                    <div class="col-md-12 col-lg-6">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="panel panel-solid-success widget-mini">
+                                    <div class="panel-body">
+                                        <i class="icon-bar-chart"></i>
+                                        <span class="total text-center">18 次</span>
+                                        <span class="title text-center">功能升级</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="panel widget-mini">
+                                    <div class="panel-body">
+                                        <i class="icon-support"></i>
+                                        <span class="total text-center">238 次</span>
+                                        <span class="title text-center">下载使用</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="panel widget-mini">
+                                    <div class="panel-body">
+                                        <i class="icon-envelope-open"></i>
+                                        <span class="total text-center">30+</span>
+                                        <span class="title text-center">社区大牛推荐</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="panel panel-solid-info widget-mini">
+                                    <div class="panel-body">
+                                        <i class="icon-user"></i>
+                                        <span class="total text-center">200+</span>
+                                        <span class="title text-center">热度评论</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                        <div class="panel panel-default browser-chart">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">SQLServer ORM 分布</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <ul>
+                                            <li><i class="fa fa-circle success-color"></i> Dapper</li>
+                                            <li><i class="fa fa-circle info-color"></i> EF</li>
+                                            <li><i class="fa fa-circle primary-color"></i> NHibernate</li>
+                                            <li><i class="fa fa-circle warning-color"></i> ADO.Net</li>
+                                            <li><i class="fa fa-circle default-color"></i> Other</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <div id="doughnut-canvas-holder">
+                                            <canvas id="doughnut-chart-area" width="137" height="137"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">DapperEx 提升工作效率</h3>
+                                <div class="actions pull-right">
+                                    <i class="fa fa-expand"></i>
+                                </div>
+                            </div>
+                            <div class="panel-body widget-gauge">
+                                <canvas width="160" height="100" id="gauge" class=""></canvas>
+                                <div class="goal-wrapper">
+                                    <span class="gauge-value pull-left"></span>
+                                    <span id="gauge-text" class="gauge-value pull-left"></span>
+                                    <span class="gauge-value pull-left">%</span>
+                                    <span id="goal-text" class="goal-value pull-right">200%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">简介</h3>
+                            </div>
+                            <div class="panel-body server-chart">
+                                <div class="row">
+                                    <div class="tab-wrapper tab-bottom tab-primary" style="margin:0 10px 0 10px;">
+                                        <div class="tab-content">
+                                            &nbsp; &nbsp; 由于在开发实践中发现，EntityFramework（以下简称EF）对开发效率的提高有很大帮助；
+                                            但EF框架本身是个重量级框架，运行效率稍低、深入学习成本较高。
+                                            面对此问题，作者进行深入研究，发现EF对开发效率的提高是基于“操作表达式化”的。
+                                            所以作者提出可以开发出一套使用表达式形式的基于Dapper 的框架，既提高了开发效率，又不会降低运行效率且简单易学。
+                                            <br />
+                                            &nbsp; &nbsp; DapperEx 是一个基于 Dapper 的数据库访问组件，对关系型数据库 SqlServer 提供数据访问功能，包括增、删、改、查、事务等。
+                                            且具有很强的可扩展性，可快速支持 MySql、PostgreSql 等。
+                                            DapperEx 现在支持 .Net Framework 4.5及以上版本和 .Net Core 2.0 及以上版本。
+                                            <br />
+                                            &nbsp; &nbsp; GITHUB：<br />
+                                            &nbsp; &nbsp; &nbsp; &nbsp; https://github.com/zl33842901/DapperEx<br />
+                                            &nbsp; &nbsp; NUGET：<br />
+                                            &nbsp; &nbsp; &nbsp; &nbsp; 关键字： xLiAd.DapperEx （包含核心和仓储两个项目）
+                                            <br />
+                                            安装使用步骤：<br />
+                                            &nbsp; &nbsp; 1.	在VS中点击“工具”菜单里的“NUGET包管理器”里的“管理解决方案的NUGET包”。<br />
+                                            &nbsp; &nbsp; 2.	在“浏览”选项卡里搜索上述关键词。<br />
+                                            &nbsp; &nbsp; 3.	将搜索出来的两个结果安装到项目，通常安装到数据访问层（DAL）项目。<br />
+                                            &nbsp; &nbsp; 4.	为实体类编写仓储并继承 xLiAd.DapperEx.Repository.Repository&lt;T&gt;>类。<br />
+                                            &nbsp; &nbsp; 5.	可以将仓储实例作为变量，直接调用其中的方法。<br />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </section>
+        </section>
+        <!--main content end-->
+    </section>
+    @await Html.PartialAsync("SideBar")
+    @await Html.PartialAsync("Config")
+    @await Html.PartialAsync("FootInclude")
+    <script>
+        $(document).ready(function () {
+            app.dateRangePicker();
+            app.chartJs();
+            app.weather();
+            app.spinStart();
+            app.spinStop();
+        });
+    </script>
+
+</body>
+
+</html>

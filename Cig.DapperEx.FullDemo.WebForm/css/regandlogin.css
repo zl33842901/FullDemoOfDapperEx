@@ -1,0 +1,88 @@
+﻿.regcontainer{
+    width:99%;
+    max-width:580px;
+    margin:0 auto;
+}
+.regcontainer tr{
+    height:78px;
+}
+.logincontainer{
+    width:99%;
+    max-width:530px;
+    margin:0 auto;
+}
+.logincontainer tr{
+    height:68px;
+}
+.logincontainer .input-group{
+    margin-top:10px;
+}
+.gpcontainer .input-group{
+    width:80%;
+    max-width:350px;
+    float:left;
+}
+.gpcontainer .tip{
+    float:right;
+    color:darkgray;
+    margin-top:8px;
+    font-size:12px;
+}
+.gpcontainer .checkinfo{
+    float:left;
+    color:#303030;
+    font-size:12px;
+    margin-left:8px;
+}
+.regcontainer .checkinfo{
+    margin-top:8px;
+}
+.logincontainer .checkinfo{
+    margin-top:18px;
+}
+.gpcontainer .vcodespan{
+    padding:2px 6px;
+}
+.gpcontainer .vcodespan img{
+    cursor:pointer;
+}
+.gpcontainer button{
+    margin-left:100px;
+}
+.popReg {
+    width: 100%;
+    max-width:580px;
+    height: 590px;
+}
+.popBox {
+    position: fixed;
+    overflow: hidden;
+    background: #FFF;
+    border-radius: 3px;
+    z-index: 402;
+    display: none;
+}
+.popBox .nav {
+    position: relative;
+    padding: 0px 10px;
+    height: 40px;
+    line-height: 40px;
+    background: #666;
+}
+.popBox a.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    background: url(/images/close.png) no-repeat;
+    cursor: pointer;
+}
+.popLogin {
+    width: 99%;
+    max-width:580px;
+    height: 430px;
+}
+.gpcontainer caption{
+    padding-left:8px;
+}

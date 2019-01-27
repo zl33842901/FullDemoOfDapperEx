@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DapperEx>
+  <select id="DictSelect">
+    Select * from DictInfo
+  </select>
+  <delete id="deleteUser">
+    delete from DictInfo where dictid=#{id}
+  </delete>
+  <select id="JoinSelect">
+    select Articles.*, DictName from Articles
+    left join DictInfo on Articles.DictID=DictInfo.DictID
+  </select>
+</DapperEx>

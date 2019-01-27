@@ -1,0 +1,30 @@
+jquery    MIT
+bootstrap                      MIT
+bootstrap-slider  滑动手柄
+bootstrap-wysihtml5   简单的富文本编辑器
+c3Chart    图形报表
+calendar - clndr    日期选择
+chartjs     强大的图形报表  SVG引擎，可动
+ckeditor    富文本编辑器
+countTo.js    未知
+dataTables   数据表格   https://datatables.net/manual/    MIT
+daterangepicker  日期范围
+dropzone    上传
+gauge       仪表盘  选颜色
+icheck     带样式的复选框
+jvectormap  地图
+mask   input 输入限制                        MIT
+messenger  弹窗及数据传递 （可用来弹出提示)  MIT
+morris   图形报表 直方图 线图  饼图
+navgoco   多级滑动导航           BSD
+pace   页面加载中效果             https://github.com/HubSpot/PACE   MIT
+sortNestable   元素拖动排序
+sparkline    图形报表
+switchery   IOS7样式的开关钮
+validation    表单验证
+wizard - loader   进度加载条
+jquery.fullscreen   全屏功能                 MIT
+VUE                              MIT
+
+
+neuboard    http://support.wrapbootstrap.com/knowledge_base/topics/usage-licenses   付费授权

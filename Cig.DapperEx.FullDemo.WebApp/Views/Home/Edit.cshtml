@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>DapperEx 完整DEMO</title>
+    @await Html.PartialAsync("HeadInclude")
+</head>
+<body>
+    <section id="main-wrapper" class="theme-default">
+        @await Html.PartialAsync("Header")
+        @await Html.PartialAsync("Left")
+        <!--main content start-->
+        <section class="main-content-wrapper">
+            <div class="pageheader">
+                <h1>DapperEx 添加、编辑测试</h1>
+                <div class="breadcrumb-wrapper hidden-xs">
+                    <span class="label">您的位置:</span>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="javascript:;">DapperEx 完整DEMO</a>
+                        </li>
+                        <li>Tables</li>
+                        <li class="active">添加、编辑</li>
+                    </ol>
+                </div>
+            </div>
+
+            <section id="main-content" class="animated fadeInUp">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">修改数据</h3>
+                                <div class="actions pull-right">
+                                    <i class="fa fa-expand"></i>
+                                    <i class="fa fa-chevron-down"></i>
+                                    <i class="fa fa-times"></i>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>标题</td>
+                                            <td><input type="text" class="form-control" v-model="Model.Title" /></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Dict</td>
+                                            <td>
+                                            <select  class="form-control" v-model="Model.DictID">
+                                                <option  v-for="item in items" :value="item.Key">{{item.Value}}</option>
+                                                </select>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>状态</td>
+                                            <td>
+                                            <select class="form-control" v-model="Model.Deleted">
+                                                <option value="false">未删除</option>
+                                                <option value="true">已删除</option>
+                                            </select>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="panel-footer"><input type="button" value="提交" v-on:click="Submit" class="btn btn-info" /></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                <p>
+                                </p>
+                                <p>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </section>
+        <!--main content end-->
+    </section>
+    @await Html.PartialAsync("SideBar")
+    @await Html.PartialAsync("Config")
+    @await Html.PartialAsync("FootInclude")
+    <script>
+        $(document).ready(function () {
+            app.dateRangePicker();
+            app.chartJs();
+            app.weather();
+            app.spinStart();
+            app.spinStop();
+        });
+
+        var vm = new Vue({
+            el: "#main-content",
+            data: {
+                Model:  @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Model)),
+                items: []
+            },
+            methods: {
+                Submit: function () {
+                    $.post("/Home/Edit", this.Model, function (data, status) {
+                        if (data.Success) {
+                            alert("操作成功！DapperEx的返回值为 " + data.Result);
+                            location = "/Home/PageList";
+                        }
+                    });
+                }
+            },
+            created: function () {
+                var that = this;
+                $.get("/Home/GetAllDict", function (data, status) {
+                    that.items = data.Result;
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
